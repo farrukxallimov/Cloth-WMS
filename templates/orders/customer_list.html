@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Ta’minotchilar - Cloth WMS{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Ta’minotchilar ro‘yxati</h2>
+        <a href="{% url 'orders:customer_create' %}" class="btn btn-primary">Ta’minotchi qo'shish</a>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ism</th>
+                    <th>Email</th>
+                    <th>Telefon</th>
+                    <th>Ro‘yxatdan o‘tish sanasi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.phone }}</td>
+                    <td>{{ customer.created_at|date:"d.m.Y" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">Ta’minotchilar topilmadi</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

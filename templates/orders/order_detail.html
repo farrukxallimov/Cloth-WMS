@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Buyurtma #{{ order.id }} - Cloth WMS{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Buyurtma #{{ order.id }}</h2>
+    </div>
+    <div class="card-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div>
+                <h3>Buyurtma haqida ma’lumot</h3>
+                <p><strong>Status:</strong> {{ order.get_status_display }}</p>
+                <p><strong>To'lov summasi:</strong> {{ order.total_amount }} so'm</p>
+                <p><strong>Yaratilgan sanasi:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
+                <p><strong>Yaratdi:</strong> {{ order.created_by.username }}</p>
+                <p><strong>Izoh:</strong> {{ order.notes|default:"Нет" }}</p>
+            </div>
+            <div>
+                <h3>Ta’minotchi haqida malumot</h3>
+                <p><strong>Ism:</strong> {{ order.customer.name }}</p>
+                <p><strong>Email:</strong> {{ order.customer.email }}</p>
+                <p><strong>Telefon:</strong> {{ order.customer.phone }}</p>
+                <p><strong>Manzil:</strong> {{ order.customer.address }}</p>
+            </div>
+        </div>
+
+        <h3>Buyurtma pozitsiyalari</h3>
+        {% if order.items.all %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Tovar</th>
+                        <th>Miqdori</th>
+                        <th>Narxi</th>
+                        <th>Summa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.items.all %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price }} So'm</td>
+                        <td>{{ item.total_price }} So'm</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Buyurtmada pozitsiyalar yo‘q</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

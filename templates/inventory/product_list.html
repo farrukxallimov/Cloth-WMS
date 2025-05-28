@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Mahsulotlar - Cloth WMS{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Mahsulotlar ro‘yxati</h2>
+        <a href="{% url 'inventory:product_create' %}" class="btn btn-primary">Mahsulot qo‘shish</a>
+    </div>
+    <div class="card-body">
+        <form method="get" class="search-form">
+            <div class="form-group">
+                <label>Izlash</label>
+                <input type="text" name="q" class="form-control" value="{{ query }}" placeholder="Nomi, artikuli, rangi...">
+            </div>
+            <div class="form-group">
+                <label>Kategoriya</label>
+                <select name="category" class="form-control">
+                    <option value="">Barcha kategoriyalar</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if category.id|stringformat:"s" == selected_category %}selected{% endif %}>
+                            {{ category.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Izlash</button>
+            </div>
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Artikul</th>
+                    <th>Nomi</th>
+                    <th>Kategoriya</th>
+                    <th>O‘lcham</th>
+                    <th>Rangi</th>
+                    <th>Narxi</th>
+                    <th>Miqdori</th>
+                    <th>Harakatlar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.sku }}</td>
+                    <td><a href="{% url 'inventory:product_detail' product.pk %}">{{ product.name }}</a></td>
+                    <td>{{ product.category.name }}</td>
+                    <td>{{ product.size }}</td>
+                    <td>{{ product.color }}</td>
+                    <td>{{ product.price }} So'm</td>
+                    <td>
+                        {% if product.quantity < 10 %}
+                            <span style="color: red;">{{ product.quantity }}</span>
+                        {% else %}
+                            {{ product.quantity }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'inventory:product_edit' product.pk %}" class="btn btn-sm btn-warning">O‘zgartirish</a>
+                        <a href="{% url 'inventory:stock_movement_create' product.pk %}" class="btn btn-sm btn-success">Harakat</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8">Mahsulotlar topilmadi</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

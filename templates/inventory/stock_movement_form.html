@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }} - Cloth WMS{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>{{ title }}</h2>
+    </div>
+    <div class="card-body">
+        <p><strong>Tovar:</strong> {{ product.name }} ({{ product.sku }})</p>
+        <p><strong>Joriy miqdori:</strong> {{ product.quantity }}</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>{{ form.movement_type.label }}</label>
+                {{ form.movement_type }}
+            </div>
+            <div class="form-group">
+                <label>{{ form.quantity.label }}</label>
+                {{ form.quantity }}
+            </div>
+            <div class="form-group">
+                <label>{{ form.notes.label }}</label>
+                {{ form.notes }}
+            </div>
+            <button type="submit" class="btn btn-primary">Saqlash</button>
+            <a href="{% url 'inventory:product_detail' product.pk %}" class="btn btn-secondary">Bekor qilish</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

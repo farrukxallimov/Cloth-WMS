@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Buyurtmalar - Cloth WMS{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Buyurtmalar ro‘yxati</h2>
+        <a href="{% url 'orders:order_create' %}" class="btn btn-primary">Buyurtma yaratish</a>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Ta’minotchi</th>
+                    <th>Status</th>
+                    <th>Summa</th>
+                    <th>Yaratilgan sanasi</th>
+                    <th>Amallar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>#{{ order.id }}</td>
+                    <td>{{ order.customer.name }}</td>
+                    <td>{{ order.get_status_display }}</td>
+                    <td>{{ order.total_amount }} So'm</td>
+                    <td>{{ order.created_at|date:"d.m.Y H:i" }}</td>
+                    <td>
+                        <a href="{% url 'orders:order_detail' order.pk %}" class="btn btn-sm btn-primary">Ko‘rish</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">Buyurtmalar topilmadi</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

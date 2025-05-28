@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - Cloth WMS{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>{{ product.name }}</h2>
+        <div>
+            <a href="{% url 'inventory:product_edit' product.pk %}" class="btn btn-warning">Tahrirlash</a>
+            <a href="{% url 'inventory:stock_movement_create' product.pk %}" class="btn btn-success">Harakat kiritish</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div>
+                <h3>Информация о товаре</h3>
+                <p><strong>Artikul:</strong> {{ product.sku }}</p>
+                <p><strong>Kategoriya:</strong> {{ product.category.name }}</p>
+                <p><strong>O‘lcham:</strong> {{ product.size }}</p>
+                <p><strong>Rangi:</strong> {{ product.color }}</p>
+                <p><strong>Narxi:</strong> {{ product.price }} So'm </p>
+                <p><strong>Miqdori:</strong> {{ product.quantity }}</p>
+                <p><strong>Tavsif:</strong> {{ product.description|default:"Не указано" }}</p>
+            </div>
+            <div>
+                <h3>Harakatlar tarixi</h3>
+                {% if movements %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Sana</th>
+                                <th>Turi</th>
+                                <th>Miqdori</th>
+                                <th>Foydalanuvchi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for movement in movements %}
+                            <tr>
+                                <td>{{ movement.created_at|date:"d.m.Y H:i" }}</td>
+                                <td>{{ movement.get_movement_type_display }}</td>
+                                <td>{{ movement.quantity }}</td>
+                                <td>{{ movement.user.username }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Harakatlar topilmadi</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

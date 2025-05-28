@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }} - Cloth WMS{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>{{ title }}</h2>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>{{ form.customer.label }}</label>
+                {{ form.customer }}
+            </div>
+            <div class="form-group">
+                <label>{{ form.status.label }}</label>
+                {{ form.status }}
+            </div>
+            <div class="form-group">
+                <label>{{ form.notes.label }}</label>
+                {{ form.notes }}
+            </div>
+            <div class="form-group">
+                <label>{{ form.delivery_status.label }}</label>
+                {{ form.delivery_status }}
+            </div>
+            <div class="form-group">
+                <label>{{ form.delivery_date.label }}</label>
+                {{ form.delivery_date }}
+            </div>
+            <div class="form-group">
+                <label>{{ form.total_amount.label }}</label>
+                {{ form.total_amount }}
+            </div>
+            <button type="submit" class="btn btn-primary">Saqlash</button>
+            <a href="{% url 'orders:order_list' %}" class="btn btn-secondary">Bekor qilish</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

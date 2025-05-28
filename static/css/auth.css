@@ -1,0 +1,137 @@
+/* Authentication CSS for Clothing WMS - Login, register, profile styles */
+
+/* Login/Register Page */
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+}
+
+.auth-card {
+    max-width: 400px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.auth-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.auth-header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.auth-body {
+    padding: 30px;
+    background-color: white;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #6c757d;
+}
+
+/* Form elements customized for auth pages */
+.auth-input {
+    border-radius: 5px;
+    padding: 12px 15px;
+    height: auto;
+}
+
+.auth-btn {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    border-radius: 5px;
+    padding: 12px;
+    font-weight: 600;
+    width: 100%;
+}
+
+.auth-btn:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+/* Profile Page */
+.profile-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 40px 0;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+}
+
+.profile-avatar-text {
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.profile-name {
+    font-size: 24px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.profile-role {
+    text-align: center;
+    opacity: 0.8;
+}
+
+.profile-detail-card {
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.profile-detail-header {
+    border-bottom: 1px solid #e9ecef;
+    padding: 15px 20px;
+}
+
+.profile-detail-title {
+    font-weight: 600;
+    margin: 0;
+}
+
+.profile-detail-body {
+    padding: 20px;
+}
+
+.profile-info-item {
+    margin-bottom: 15px;
+}
+
+.profile-info-item:last-child {
+    margin-bottom: 0;
+}
+
+.profile-info-label {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.profile-info-value {
+    color: #495057;
+}
