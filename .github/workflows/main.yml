@@ -16,12 +16,13 @@ jobs:
     - name: Set up SSH
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        # Используем printf для безопасной записи ключа
+        printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H 15.207.112.123 >> ~/.ssh/known_hosts
+        ssh-keyscan -H 15.207.112.123 >> ~/.ssh/known_hosts # Убедитесь, что IP правильный
         chmod 644 ~/.ssh/known_hosts
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      # env: # Эту строку можно удалить, так как ключ передается напрямую
+      #   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Deploy to EC2
       run: |
